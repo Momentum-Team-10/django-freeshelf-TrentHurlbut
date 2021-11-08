@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block content %}
+<body class="sans-serif pv2 ph4">
+  <header class="flex items-center justify-between bg-green white ph3">
+    <div id="title">
+      <h1 class="white">Freeshelf</h1>
+    </div>
+    <div id="account-menu">
+      <a class="washed-blue" href="#">Login</a> | <a class="washed-blue" href="#">Register</a>
+    </div>
+  </header>
+  <nav id="category-nav" class="flex items-center">
+    <div>
+      Books by category:
+    </div>
+    <ul class="list ml1 pa0 flex flex-wrap">
+      <li class="mr2 pr2 bw1 br"><a href="#">CSS</a></li>
+      <li class="mr2 pr2 bw1 br"><a href="#">HTML</a></li>
+      <li class="mr2 pr2 bw1 br"><a href="#">JavaScript</a></li>
+      <li class="mr2 pr2 bw1 br"><a href="#">Python</a></li>
+      <li class=""><a href="#">R</a></li>
+    </ul>
+  </nav>
+  <main>
+    <section id="books">
+      <h2>Recently added books</h2>
+      {% for book in books %}
+      {% if book.title %}
+      <div class="mv3">
+        <div class="normal f3"><a href="{{book.book_url}}">{{book.title}}</a>{% endif %} {% if book.author %} <span class="f4">by {{book.author}}</span></div> {% endif %}
+        {% if book.description %}
+        <p class="lh-copy">
+          {{book.description}}
+        </p>
+        {% endif %}
+        <div class="flex">
+          <div class="mr2 pr2 bw1 br green">
+            Favorited X times
+          </div>
+          {% if book.created_at %}
+          <div class="mr2 pr2 bw1 br">
+            {{book.created_at}}
+          </div>
+          {% endif %}
+          <div>
+            Category: <a href="#">Placeholder</a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </section>
+  </main>
+{% endblock %}
