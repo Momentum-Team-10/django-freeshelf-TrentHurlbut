@@ -26,3 +26,7 @@ def add_books(request):
   else:
     form = BookForm()
   return render(request, 'books/add_books.html', {'form':form})
+
+def filter_by(request, category):
+  books = Book.objects.all()
+  return render(request, 'books/filtered_page.html', {"books":books, "category":category})

@@ -27,30 +27,29 @@
   </nav>
   <main>
     <section id="books">
-      <h2>Recently added books</h2>
+      <h2>{{category}}</h2>
       {% for book in books %}
-      {% if book.title %}
+      {% for filter in book.categories.all %}
+      {% if filter == category %}
       <div class="mv3">
-        <div class="normal f3"><a href="{{book.book_url}}">{{book.title}}</a>{% endif %} {% if book.author %} <span class="f4">by {{book.author}}</span></div> {% endif %}
-        {% if book.description %}
+        <div class="normal f3"><a href="{{book.book_url}}">{{book.title}}</a><span class="f4">by {{book.author}}</span></div>
         <p class="lh-copy">
           {{book.description}}
         </p>
-        {% endif %}
         <div class="flex">
           <div class="mr2 pr2 bw1 br green">
             Favorited X times
           </div>
-          {% if book.created_at %}
           <div class="mr2 pr2 bw1 br">
             {{book.created_at}}
           </div>
-          {% endif %}
           <div>
             Categories: {% for category in book.categories.all %}<a href="books/{{category}}/">{{category}}</a>   {% endfor %}
           </div>
         </div>
       </div>
+      {% endif %}
+      {% endfor %}
       {% endfor %}
     </section>
   </main>

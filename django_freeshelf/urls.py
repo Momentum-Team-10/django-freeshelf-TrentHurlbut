@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 from books import views
 import debug_toolbar
+from books.models import Category
 
 admin.autodiscover()
 
@@ -27,4 +28,5 @@ urlpatterns = [
     path('accounts/', include('registration.backends.simple.urls')),
     path('accounts/profile/', views.profile_page, name = 'profile_page'),
     path('books/add_books/', views.add_books, name = 'add_books'),
+    path('books/<str:category>/', views.filter_by, name = 'filter_by'),
 ]
