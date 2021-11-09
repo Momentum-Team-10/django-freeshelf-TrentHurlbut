@@ -47,7 +47,7 @@
           </div>
           {% endif %}
           <div>
-            Category: <a href="#">{{book.category}}</a>
+            Category: {% for category in book.categories.all %}<a href="#">{{category}}</a>   {% endfor %}
           </div>
         </div>
       </div>

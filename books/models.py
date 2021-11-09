@@ -29,7 +29,7 @@ class Book(models.Model):
     created_at = models.DateTimeField()
     image_url = models.URLField(blank=True, null=True)
     favorited = models.BooleanField(default=False)
-    category = models.ManyToManyField('Category', related_name="books")
+    categories = models.ManyToManyField('Category')
 
     def publish(self):
         self.created_at = timezone.now()

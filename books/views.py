@@ -1,12 +1,13 @@
 from django.shortcuts import render
-from .models import Book
+from .models import Book, Category
 from django.contrib.auth.decorators import login_required
 from .forms import BookForm
 from django.shortcuts import redirect
 
 def home_page(request):
   books = Book.objects.order_by('created_at')
-  return render(request, 'books/home_page.html', {"books":books})
+  categories = Category.objects.all()
+  return render(request, 'books/home_page.html', {"books":books, "categories":categories})
 
 @login_required
 def profile_page(request):
@@ -20,6 +21,7 @@ def add_books(request):
     if form.is_valid():
       book = form.save(commit=False)
       book.publish()
+      form.save_m2m()
       return redirect('home_page')
   else:
     form = BookForm()
