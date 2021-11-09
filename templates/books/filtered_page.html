@@ -27,10 +27,8 @@
   </nav>
   <main>
     <section id="books">
-      <h2>{{category}}</h2>
+      <h2>{{category}} Books</h2>
       {% for book in books %}
-      {% for filter in book.categories.all %}
-      {% if filter == category %}
       <div class="mv3">
         <div class="normal f3"><a href="{{book.book_url}}">{{book.title}}</a><span class="f4">by {{book.author}}</span></div>
         <p class="lh-copy">
@@ -48,8 +46,6 @@
           </div>
         </div>
       </div>
-      {% endif %}
-      {% endfor %}
       {% endfor %}
     </section>
   </main>

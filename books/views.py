@@ -28,5 +28,5 @@ def add_books(request):
   return render(request, 'books/add_books.html', {'form':form})
 
 def filter_by(request, category):
-  books = Book.objects.all()
+  books=Book.objects.filter(categories__name=category)
   return render(request, 'books/filtered_page.html', {"books":books, "category":category})
