@@ -23,7 +23,7 @@
   </nav>
   <main>
     <section id="books">
-      <h2>My Favorites</h2>
+      <h2>{{user.username}}'s Favorites</h2>
       {% for book in books %}
       {% if book.title %}
       <div class="mv3">
@@ -43,7 +43,7 @@
           </div>
           {% endif %}
           <div>
-            Category: <a href="#">Placeholder</a>
+            Category: <a href="#">{{book.category}}</a>
           </div>
         </div>
       </div>

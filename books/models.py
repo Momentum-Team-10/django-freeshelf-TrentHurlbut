@@ -2,8 +2,19 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.utils import timezone
 
+CATEGORIES = (
+    ('game development', 'Game Development'), 
+    ('cli', 'CLI'), 
+    ('r', 'R'), 
+    ('python', 'Python'), 
+    ('javascript', 'JavaScript'), 
+    ('html', 'HTML'), 
+    ('css', 'CSS')
+    )
+
 
 class User(AbstractUser):
+
     def __repr__(self):
         return f"<User username={self.username}>"
 
@@ -18,6 +29,7 @@ class Book(models.Model):
     created_at = models.DateTimeField()
     image_url = models.URLField(blank=True, null=True)
     favorited = models.BooleanField(default=False)
+    category = models.ManyToManyField('Category', related_name="books")
 
     def publish(self):
         self.created_at = timezone.now()
@@ -25,3 +37,9 @@ class Book(models.Model):
 
     def __str__(self):
         return self.title
+
+class Category(models.Model):
+    name=models.CharField(max_length=16, choices=CATEGORIES, default=None, null=True)
+
+    def __str__(self):
+        return self.name

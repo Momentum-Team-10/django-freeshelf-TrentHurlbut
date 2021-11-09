@@ -26,4 +26,5 @@ urlpatterns = [
     path('__debug__/', include(debug_toolbar.urls)),
     path('accounts/', include('registration.backends.simple.urls')),
     path('accounts/profile/', views.profile_page, name = 'profile_page'),
+    path('books/add_books/', views.add_books, name = 'add_books'),
 ]

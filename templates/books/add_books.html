@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+<body class="sans-serif pv2 ph4">
+  <header class="flex items-center justify-between bg-green white ph3">
+    <div id="title">
+      <h1 class="white">Freeshelf</h1>
+    </div>
+    <div id="account-menu">
+      <a class="washed-blue" href="{% url 'home_page' %}">Freeshelf</a> | <a class="washed-blue" href="{% url 'auth_logout' %}">Logout</a>
+    </div>
+  </header>
+  <h2>Add a Book</h2>
+    <form method="POST" class="post-form">
+      {% csrf_token %} {{ form.as_p }}
+      <button type="submit" class="save btn btn-default">Save</button>
+    </form>
+</body>
+{% endblock %}
