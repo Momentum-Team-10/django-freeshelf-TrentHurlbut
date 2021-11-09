@@ -13,10 +13,11 @@ class User(AbstractUser):
 class Book(models.Model):
     title = models.CharField(max_length=500)
     author = models.CharField(max_length=200)
-    book_url = models.URLField()
+    book_url = models.URLField(unique=True)
     description = models.TextField()
     created_at = models.DateTimeField()
     image_url = models.URLField(blank=True, null=True)
+    favorited = models.BooleanField(default=False)
 
     def publish(self):
         self.created_at = timezone.now()

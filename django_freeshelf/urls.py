@@ -25,4 +25,5 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path('__debug__/', include(debug_toolbar.urls)),
     path('accounts/', include('registration.backends.simple.urls')),
+    path('accounts/profile/', views.profile_page, name = 'profile_page'),
 ]

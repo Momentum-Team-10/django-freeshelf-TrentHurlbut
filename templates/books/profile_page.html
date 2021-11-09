@@ -6,10 +6,7 @@
       <h1 class="white">Freeshelf</h1>
     </div>
     <div id="account-menu">
-      {% if request.user.is_authenticated %} <a class="washed-blue" href="{% url 'profile_page' %}">My Page</a> | <a class="washed-blue" href="{% url 'auth_logout' %}">Logout</a>  
-      {% else %}
-      <a class="washed-blue" href="{% url 'auth_login' %}">Login</a> | <a class="washed-blue" href="{% url 'registration_register' %}">Register</a>
-      {% endif %}
+      <a class="washed-blue" href="{% url 'home_page' %}">Freeshelf</a> | <a class="washed-blue" href="{% url 'auth_logout' %}">Logout</a>
     </div>
   </header>
   <nav id="category-nav" class="flex items-center">
@@ -26,7 +23,7 @@
   </nav>
   <main>
     <section id="books">
-      <h2>Recently added books</h2>
+      <h2>My Favorites</h2>
       {% for book in books %}
       {% if book.title %}
       <div class="mv3">
@@ -53,4 +50,5 @@
       {% endfor %}
     </section>
   </main>
+</body>
 {% endblock %}
