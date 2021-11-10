@@ -12,7 +12,7 @@ def home_page(request):
 @login_required
 def profile_page(request):
   user = request.user
-  books = Book.objects.order_by('created_at')
+  books = Book.objects.order_by('-created_at')
   return render(request, 'books/profile_page.html', {"books":books, "user":user})
 
 def add_books(request):
@@ -27,9 +27,10 @@ def add_books(request):
     form = BookForm()
   return render(request, 'books/add_books.html', {'form':form})
 
-def filter_by(request, category):
-  books=Book.objects.filter(categories__name=category)
-  return render(request, 'books/filtered_page.html', {"books":books, "category":category})
+def filter_by(request, name):
+  books=Book.objects.filter(categories__name=name)
+  books.order_by('-created_at')
+  return render(request, 'books/filtered_page.html', {"books":books, "category":name})
 
 def edit_book(request, pk):
   book = get_object_or_404(Book, pk=pk)

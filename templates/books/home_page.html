@@ -18,11 +18,9 @@
       Books by category:
     </div>
     <ul class="list ml1 pa0 flex flex-wrap">
-      <li class="mr2 pr2 bw1 br"><a href="#">CSS</a></li>
-      <li class="mr2 pr2 bw1 br"><a href="#">HTML</a></li>
-      <li class="mr2 pr2 bw1 br"><a href="#">JavaScript</a></li>
-      <li class="mr2 pr2 bw1 br"><a href="#">Python</a></li>
-      <li class=""><a href="#">R</a></li>
+      {% for category in categories %}
+      <li class="mr2 pr2 bw1 br"><a href="{% url 'filter_by' name=category.name %}">{{category}}</a></li>
+      {% endfor %}
     </ul>
   </nav>
   <main>
@@ -48,7 +46,7 @@
           </div>
           {% endif %}
           <div>
-            Categories: {% for category in book.categories.all %}<a href="books/{{category}}/">{{category}}</a>   {% endfor %}
+            Categories: {% for category in book.categories.all %}<a href="{% url 'filter_by' name=category.name %}">{{category}}</a>  {% endfor %}
           </div>
         </div>
       </div>
