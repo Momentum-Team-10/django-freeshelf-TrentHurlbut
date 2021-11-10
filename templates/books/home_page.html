@@ -38,7 +38,16 @@
         {% endif %}
         <div class="flex">
           <div class="mr2 pr2 bw1 br green">
-            Favorited X times
+            {% if book in favorites %}
+            <form action="{% url 'home_page' pk=book.pk %}" method="POST">
+              <input type="submit"><i class="fa-solid fa-bookmark"></i><p>Unfavorite</p></input>
+            </form>
+            <span class="f4">Favorited X times</span>
+            {% else %}
+            <form action="{% url 'home_page' pk=book.pk %}" method="POST">
+              <input class="link underline-hover" type="submit">Favorite</input>
+            </form>
+            {% endif %}
           </div>
           {% if book.created_at %}
           <div class="mr2 pr2 bw1 br">

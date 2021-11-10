@@ -14,6 +14,7 @@ CATEGORIES = (
 
 
 class User(AbstractUser):
+    favorites = models.ManyToManyField('Book', related_name='fav_books')
 
     def __repr__(self):
         return f"<User username={self.username}>"
