@@ -7,10 +7,11 @@ from django.shortcuts import redirect, get_object_or_404
 def home_page(request, pk=None):
   books = Book.objects.order_by('-created_at')
   current_user = request.user
+  """breakpoint()"""
   favorites = current_user.favorites.all()
   categories = Category.objects.all()
   if request.method == 'POST':
-    current_user.favorites.add(pk=pk)
+    current_user.favorites.add(pk=books.pk)
     return redirect('home_page')
   else:
     return render(request, 'books/home_page.html', {"books":books, "categories":categories, "favorites":favorites})
