@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+<body class="sans-serif pv2 ph4">
+  <header class="flex items-center justify-between bg-green white ph3">
+    <div id="title">
+      <a class="washed-blue link underline-hover" href="{% url 'home_page' %}"><h1 class="white">Freeshelf</h1></a>
+    </div>
+    <div id="account-menu">
+      <a class="washed-blue" href="{% url 'home_page' %}">Freeshelf</a> | <a class="washed-blue" href="{% url 'auth_logout' %}">Logout</a>
+    </div>
+  </header>
+  <h2> Delete {{book.title}}?</h2>
+  <div>
+    <form action="{% url 'delete_book' pk=book.pk %}" method="POST">
+      {% csrf_token %}
+      <p>Are you sure you want to <strong>REMOVE PERMANENTLY, FOREVER</strong> <i>{{ book.title }}</i>?</p>
+      <div>
+        <button class="dark-gray pv2 ph3 bg-white hover-bg-near-white ba b--moon-gray br2 shadow-1" type="submit">Delete Book</button>
+        <br/>
+        <br>
+        <a class="dark-gray pv2 ph3 bg-white hover-bg-near-white ba b--moon-gray br2 shadow-1 link underline-hover" href="{% url 'home_page' %}">Cancel</a>
+      </div>
+    </form>
+  </div>
+</body>
+{% endblock %}

@@ -29,4 +29,6 @@ urlpatterns = [
     path('accounts/profile/', views.profile_page, name = 'profile_page'),
     path('books/add_books/', views.add_books, name = 'add_books'),
     path('books/<str:category>/', views.filter_by, name = 'filter_by'),
+    path('books/edit/<int:pk>', views.edit_book, name = 'edit_book'),
+    path('books/delete/<int:pk>', views.delete_book, name = 'delete_book'),
 ]

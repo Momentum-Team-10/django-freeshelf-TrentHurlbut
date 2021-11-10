@@ -3,7 +3,7 @@
 <body class="sans-serif pv2 ph4">
   <header class="flex items-center justify-between bg-green white ph3">
     <div id="title">
-      <a class="washed-blue" href="{% url 'home_page' %}"><h1 class="white">Freeshelf</h1></a>
+      <a class="washed-blue link underline-hover" href="{% url 'home_page' %}"><h1 class="white">Freeshelf</h1></a>
     </div>
     <div id="account-menu">
       {% if request.user.is_authenticated %} <a class="washed-blue" href="{% url 'profile_page' %}">My Page</a> | <a class="washed-blue" href="{% url 'auth_logout' %}?next=/">Logout</a>
@@ -32,6 +32,7 @@
       {% if book.title %}
       <div class="mv3">
         <div class="normal f3"><a href="{{book.book_url}}">{{book.title}}</a>{% endif %} {% if book.author %} <span class="f4">by {{book.author}}</span></div> {% endif %}
+        {% if request.user.is_staff %} | <a class="link underline-hover" href="{% url 'edit_book' pk=book.pk %}"> Edit </a> {% endif %}{% if request.user.is_staff %} | <a class="link underline-hover" href="{% url 'delete_book' pk=book.pk %}"> Delete </a> | {% endif %}
         {% if book.description %}
         <p class="lh-copy">
           {{book.description}}

@@ -2,10 +2,10 @@ from django.shortcuts import render
 from .models import Book, Category
 from django.contrib.auth.decorators import login_required
 from .forms import BookForm
-from django.shortcuts import redirect
+from django.shortcuts import redirect, get_object_or_404
 
 def home_page(request):
-  books = Book.objects.order_by('created_at')
+  books = Book.objects.order_by('-created_at')
   categories = Category.objects.all()
   return render(request, 'books/home_page.html', {"books":books, "categories":categories})
 
@@ -30,3 +30,22 @@ def add_books(request):
 def filter_by(request, category):
   books=Book.objects.filter(categories__name=category)
   return render(request, 'books/filtered_page.html', {"books":books, "category":category})
+
+def edit_book(request, pk):
+  book = get_object_or_404(Book, pk=pk)
+  if request.method == "POST":
+    form = BookForm(request.POST, instance=book)
+    if form.is_valid():
+      form.save()
+      return redirect('home_page')
+  else:
+    form = BookForm(instance=book)
+  return render(request, 'books/edit_book.html', {'form': form, 'book':book})
+
+def delete_book(request, pk):
+  book = get_object_or_404(Book, pk=pk)
+  if request.method == "POST":
+    book.delete()
+    return redirect(to="home_page")
+
+  return render(request, "books/delete_book.html", {"book": book})

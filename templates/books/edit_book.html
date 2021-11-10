@@ -9,7 +9,7 @@
       <a class="washed-blue" href="{% url 'home_page' %}">Freeshelf</a> | <a class="washed-blue" href="{% url 'auth_logout' %}">Logout</a>
     </div>
   </header>
-  <h2>Add a Book</h2>
+  <h2> Edit {{book.title}}</h2>
     <form method="POST" class="post-form">
       {% csrf_token %} {{ form.as_p }}
       <button type="submit" class="save btn btn-default">Save</button>
